@@ -33,6 +33,7 @@ export type TOrdersData = {
 };
 
 export type TUser = {
+  user: { email: string; name: string } | null;
   email: string;
   name: string;
 };
