@@ -2,12 +2,20 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { orderBurgerApi } from '@api';
 import { createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
+import { clearConstructor } from '../burger-constructor/slice';
 
 export const createOrder = createAsyncThunk(
   'order/create',
-  async (ingredients: string[]) => {
-    console.log('Submitting order...');
-    return orderBurgerApi(ingredients);
+  async (ingredients: string[], { dispatch }) => {
+    try {
+      const response = await orderBurgerApi(ingredients);
+      dispatch(clearConstructor());
+      console.log('clear the constructor after a successful server response');
+      return response;
+    } catch (error) {
+      console.error('Order creation failed:', error);
+      throw error;
+    }
   }
 );
 

@@ -3,23 +3,28 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { selectIngredients } from '../../services/slices/ingredients/slice';
 import {
   fetchOrderByNumber,
   selectCurrentOrder
 } from '../../services/slices/feed/slice';
+import { Modal } from '../modal';
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { number } = useParams();
+  const navigate = useNavigate();
+
+  const handleModalClose = () => navigate(-1);
 
   useEffect(() => {
     dispatch(fetchOrderByNumber(Number(number)));
   }, []);
 
   const orderData = useSelector(selectCurrentOrder);
+
   const ingredients = useSelector(selectIngredients);
 
   /* Готовим данные для отображения */
@@ -68,5 +73,9 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return (
+    <Modal title={`#${orderInfo.number}`} onClose={() => handleModalClose()}>
+      <OrderInfoUI orderInfo={orderInfo} />
+    </Modal>
+  );
 };

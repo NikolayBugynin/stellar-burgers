@@ -21,17 +21,15 @@ import {
 } from '@components';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { fetchIngredients } from '../../services/slices/ingredients/slice';
 import { getUserThunk } from '../../services/slices/user/actions';
+import { selectCurrentOrder } from '../../services/slices/feed/slice';
 
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
   const background = location.state?.background;
-
-  const handleModalClose = () => navigate(-1);
 
   // Загрузка данных
   useEffect(() => {
@@ -116,32 +114,13 @@ const App = () => {
       {/* Модальные окна */}
       {background && (
         <Routes>
-          <Route
-            path='/feed/:number'
-            element={
-              <Modal title='Детали заказа' onClose={() => handleModalClose()}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route
-            path='/ingredients/:id'
-            element={
-              <Modal
-                title='Детали ингредиента'
-                onClose={() => handleModalClose()}
-              >
-                <IngredientDetails />
-              </Modal>
-            }
-          />
+          <Route path='/feed/:number' element={<OrderInfo />} />
+          <Route path='/ingredients/:id' element={<IngredientDetails />} />
           <Route
             path='/profile/orders/:number'
             element={
               <ProtectedRoute>
-                <Modal title='Детали заказа' onClose={() => handleModalClose()}>
-                  <OrderInfo />
-                </Modal>
+                <OrderInfo />
               </ProtectedRoute>
             }
           />

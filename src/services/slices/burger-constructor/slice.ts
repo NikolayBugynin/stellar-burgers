@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TIngredient, TConstructorIngredient } from '@utils-types';
 
-interface IBurgerConstructorState {
+export interface IBurgerConstructorState {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
 }
@@ -16,14 +16,14 @@ const initialState: IBurgerConstructorState = {
   ingredients: []
 };
 
-const calculateTotalPrice = (state: IBurgerConstructorState): number => {
+export const calculateTotalPrice = (state: IBurgerConstructorState): number => {
   const bunPrice = state.bun ? state.bun.price * 2 : 0;
   return (
     bunPrice + state.ingredients.reduce((sum, item) => sum + item.price, 0)
   );
 };
 
-const burgerConstructorSlice = createSlice({
+export const burgerConstructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState,
   selectors: {

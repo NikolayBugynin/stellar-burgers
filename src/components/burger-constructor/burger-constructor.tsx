@@ -50,7 +50,6 @@ export const BurgerConstructor: FC = () => {
   // Закрытие модального окна заказа
   const closeOrderModal = () => {
     dispatch(clearOrder());
-    dispatch(clearConstructor());
     navigate('/');
   };
 
