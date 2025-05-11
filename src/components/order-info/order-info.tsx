@@ -3,21 +3,17 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { selectIngredients } from '../../services/slices/ingredients/slice';
 import {
   fetchOrderByNumber,
   selectCurrentOrder
 } from '../../services/slices/feed/slice';
-import { Modal } from '../modal';
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { number } = useParams();
-  const navigate = useNavigate();
-
-  const handleModalClose = () => navigate(-1);
 
   useEffect(() => {
     dispatch(fetchOrderByNumber(Number(number)));
@@ -73,9 +69,5 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
-  return (
-    <Modal title={`#${orderInfo.number}`} onClose={() => handleModalClose()}>
-      <OrderInfoUI orderInfo={orderInfo} />
-    </Modal>
-  );
+  return <OrderInfoUI orderInfo={orderInfo} />;
 };

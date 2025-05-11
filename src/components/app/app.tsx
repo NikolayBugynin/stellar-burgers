@@ -29,7 +29,10 @@ import { selectCurrentOrder } from '../../services/slices/feed/slice';
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const background = location.state?.background;
+
+  const handleModalClose = () => navigate(-1);
 
   // Загрузка данных
   useEffect(() => {
@@ -39,6 +42,8 @@ const App = () => {
       console.log('Initial data loaded successfully');
     });
   }, []);
+
+  const orderData = useSelector(selectCurrentOrder);
 
   return (
     <div className={styles.app}>
@@ -114,13 +119,35 @@ const App = () => {
       {/* Модальные окна */}
       {background && (
         <Routes>
-          <Route path='/feed/:number' element={<OrderInfo />} />
-          <Route path='/ingredients/:id' element={<IngredientDetails />} />
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal
+                title={`#${orderData?.number}`}
+                onClose={() => handleModalClose()}
+              >
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title='' onClose={() => handleModalClose()}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
           <Route
             path='/profile/orders/:number'
             element={
               <ProtectedRoute>
-                <OrderInfo />
+                <Modal
+                  title={`#${orderData?.number}`}
+                  onClose={() => handleModalClose()}
+                >
+                  <OrderInfo />
+                </Modal>
               </ProtectedRoute>
             }
           />
