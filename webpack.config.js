@@ -78,6 +78,7 @@ module.exports = {
       '@utils-types': path.resolve(__dirname, './src/utils/types'),
       '@api': path.resolve(__dirname, './src/utils/burger-api.ts'),
       '@slices': path.resolve(__dirname, './src/services/slices'),
+      '@cookie': path.resolve(__dirname, './src/utils/cookie'),
       '@selectors': path.resolve(__dirname, './src/services/selectors')
     }
   },
@@ -89,6 +90,7 @@ module.exports = {
     static: path.join(__dirname, './dist'),
     compress: true,
     historyApiFallback: true,
+    open: true, // сайт будет открываться сам при запуске npm run start
     port: 4000
   }
 };
