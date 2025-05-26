@@ -30,6 +30,7 @@ const IngredientSlice = createSlice({
     builder
       .addCase(fetchIngredients.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(fetchIngredients.rejected, (state, action) => {
         state.isLoading = false;
