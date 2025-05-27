@@ -3,7 +3,8 @@ import reducer, {
   moveIngredient,
   removeIngredient,
   clearConstructor,
-  IBurgerConstructorState
+  IBurgerConstructorState,
+  initialState
 } from './slice';
 import { TIngredient } from '@utils-types';
 
@@ -17,11 +18,6 @@ jest.mock('@reduxjs/toolkit', () => {
 });
 
 describe('burgerConstructorSlice reducer', () => {
-  const initialState: IBurgerConstructorState = {
-    bun: null,
-    ingredients: []
-  };
-
   const mockBun: TIngredient = {
     _id: 'bun1',
     name: 'Булка',

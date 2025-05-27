@@ -2,19 +2,11 @@ import reducer, {
   getFeedsThunk,
   fetchOrderByNumber,
   clearCurrentOrder,
-  IFeedState
+  IFeedState,
+  initialState
 } from './slice';
 
 describe('feedSlice reducer', () => {
-  const initialState: IFeedState = {
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    currentOrder: null,
-    loading: false,
-    error: null
-  };
-
   it('должен вернуть начальное состояние', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toEqual(initialState);
   });

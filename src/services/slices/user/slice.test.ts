@@ -1,4 +1,4 @@
-import reducer, { clearErrors, IUSerState } from './slice';
+import reducer, { clearErrors, IUSerState, initialState } from './slice';
 import {
   loginUserThunk,
   logoutUserThunk,
@@ -9,15 +9,6 @@ import {
 } from './actions';
 
 describe('userSlice reducer', () => {
-  const initialState: IUSerState = {
-    isAuthenticated: false,
-    loginUserRequest: false,
-    user: null,
-    orders: [],
-    ordersRequest: false,
-    error: null
-  };
-
   it('должен вернуть начальное состояние', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toEqual(initialState);
   });

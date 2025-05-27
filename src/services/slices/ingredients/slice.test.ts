@@ -1,12 +1,10 @@
-import reducer, { fetchIngredients, IngredientsState } from './slice';
+import reducer, {
+  fetchIngredients,
+  IngredientsState,
+  initialState
+} from './slice';
 
 describe('ingredientsSlice reducer', () => {
-  const initialState: IngredientsState = {
-    items: [],
-    isLoading: false,
-    error: null
-  };
-
   it('должен возвращать начальное состояние', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toEqual(initialState);
   });

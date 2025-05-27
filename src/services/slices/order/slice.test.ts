@@ -1,12 +1,11 @@
-import reducer, { createOrder, clearOrder, IorderState } from './slice';
+import reducer, {
+  createOrder,
+  clearOrder,
+  IorderState,
+  initialState
+} from './slice';
 
 describe('orderSlice reducer', () => {
-  const initialState: IorderState = {
-    order: null,
-    isLoading: false,
-    error: null
-  };
-
   it('должен вернуть начальное состояние', () => {
     expect(reducer(undefined, { type: '@@INIT' })).toEqual(initialState);
   });
