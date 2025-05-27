@@ -18,7 +18,7 @@ export interface IUSerState {
   error: string | null;
 }
 
-const initialState: IUSerState = {
+export const initialState: IUSerState = {
   isAuthenticated: false,
   loginUserRequest: false,
   user: null,
