@@ -11,7 +11,7 @@ export interface IBurgerConstructorState {
   ingredients: TConstructorIngredient[];
 }
 
-const initialState: IBurgerConstructorState = {
+export const initialState: IBurgerConstructorState = {
   bun: null,
   ingredients: []
 };
